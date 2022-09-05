@@ -6,19 +6,24 @@ Import-Module -Force "$PSScriptRoot\CommandExistance\CommandExistance.psm1"
 
 function Get-JsonIntegrity {
     Param(
-        [Parameter(Mandatory, ValueFromPipeline)] [string] $text
+        [Parameter(Mandatory, ValueFromPipeline)] [AllowEmptyString()] [string] $text
     )
 
-    if (Get-CommandExistance "Test-Json") {
-        $validJson = $text | Test-Json 2>$null
+    if ([string]::IsNullOrEmpty($text)) {
+        $validJson = $false
     }
     else {
-        try {
-            ConvertFrom-Json $text -ErrorAction Stop
-            $validJson = $true;
+        if (Get-CommandExistance "Test-Json") {
+            $validJson = $text | Test-Json 2>$null
         }
-        catch {
-            $validJson = $false;
+        else {
+            try {
+                ConvertFrom-Json $text -ErrorAction Stop
+                $validJson = $true;
+            }
+            catch {
+                $validJson = $false;
+            }
         }
     }
 
