@@ -1,0 +1,3 @@
+[submodule "CommandExistance"]
+	path = CommandExistance
+	url = https://github.com/aetonsi/pwsh__CommandExistance.git
