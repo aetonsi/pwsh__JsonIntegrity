@@ -1,5 +1,5 @@
 # pwsh__JsonIntegrity
-Powershell util to check whether a given string is valid JSON.
+Powershell tool to check whether a given string is valid JSON.
 
 # Usage
 ```powershell
